@@ -28,7 +28,7 @@ Day 2 (Live coding):
 4. Organizing your genomics project
 
 ## **PreWorkshop Instructions**
-1. Go to the PreWorkshop folder and read this file: PreWorkshop01_StartHere.md
+1. Go to the PreWorkshop folder (see above) and read this file: PreWorkshop01_StartHere.md
 2. Follow the instructions to get access to the CRC servers
 3. Go through the PreWorkshop recorded lectures. Make sure that when you finish you have your environment set up with the directories and data needed for Day 2 of the live workshop
 4. Take the survey
