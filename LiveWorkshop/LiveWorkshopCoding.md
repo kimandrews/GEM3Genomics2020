@@ -1,6 +1,6 @@
 # GEM3 Genomics Workshop: Live Coding
 
-We will be working with whole genome Illumina shotgun sequence data from the bacteria *Escherichia coli*. These data are publicly available from the Data Carpentries Genomics Workshop. We will conduct bioinformatic analyses using these data to identify genetic variants.
+We will be analyzing whole genome Illumina shotgun sequence data from the bacteria *Escherichia coli* to identify genetic variants. The data and analyses used here are modified from the publicly available Data Carpentries Genomics Workshop.
 
 First, we need to get the raw sequence data. Go to your home directory, create a new directory for your analyses, and navigate into that directory:
 
@@ -66,7 +66,8 @@ Run trimmomatic for one sample:
 trimmomatic PE ./01-Raw/SRR2589044_1.fastq.gz ./01-Raw/SRR2589044_2.fastq.gz \
                 ./03-Trim/SRR2589044_1.trim.fastq.gz ./03-Trim/SRR2589044_1un.trim.fastq.gz \
                 ./03-Trim/SRR2589044_2.trim.fastq.gz ./03-Trim/SRR2589044_2un.trim.fastq.gz \
-                SLIDINGWINDOW:4:20 MINLEN:25 \				ILLUMINACLIP:/opt/modules/biology/trimmomatic/0.33/bin/adapters/NexteraPE-PE.fa:2:40:15 
+                SLIDINGWINDOW:4:20 MINLEN:25 \
+                ILLUMINACLIP:/opt/modules/biology/trimmomatic/0.33/bin/adapters/NexteraPE-PE.fa:2:40:15 
 ```
 ## Align to a reference genome
 Next, we will align the cleaned sequence reads to a reference genome for one sample using the program bwa.
