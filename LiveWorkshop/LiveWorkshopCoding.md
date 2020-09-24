@@ -34,7 +34,7 @@ cd ../
 ```
 
 ## Quality control
-Next, we will evaluate the quality of the raw sequence data using two programs: Fastqc and Multiqc. Fastqc summarizes the quality of one sequence file at a time, whereas Multiqc summarizes the quality of multiple sequence files at a time.
+Next, we will evaluate the quality of the raw sequence data using two programs: Fastqc and Multiqc. Fastqc summarizes quality for one fastq file at a time, whereas Multiqc summarizes quality for multiple fastq files at a time.
 
 Make a new directory to store the output of quality control analyses:
 
@@ -63,14 +63,14 @@ module load trimmomatic
 ```
 Run trimmomatic for one sample:
 ```
-trimmomatic PE ./01-Raw/SRR2589044_1.fastq.gz ./01-Raw/SRR2589044_2.fastq.gz \
+trimmomatic PE ./01-RawData/SRR2589044_1.fastq.gz ./01-RawData/SRR2589044_2.fastq.gz \
                 ./03-Trim/SRR2589044_1.trim.fastq.gz ./03-Trim/SRR2589044_1un.trim.fastq.gz \
                 ./03-Trim/SRR2589044_2.trim.fastq.gz ./03-Trim/SRR2589044_2un.trim.fastq.gz \
                 SLIDINGWINDOW:4:20 MINLEN:25 \
                 ILLUMINACLIP:/opt/modules/biology/trimmomatic/0.33/bin/adapters/NexteraPE-PE.fa:2:40:15 
 ```
 ## Align to a reference genome
-Next, we will align the cleaned sequence reads to a reference genome for one sample using the program bwa.
+Next, we will align the cleaned sequence reads to a reference genome for one sample using the program BWA.
 
 First, create a directory and a symlink for the reference genome:
 ```
@@ -96,12 +96,26 @@ Make a directory to store the results of genome alignment, and align the reads f
 mkdir ./04-Align
 bwa mem ./Ref/ecoli_rel606.fasta ./03-Trim_subset/SRR2584866_1.trim.sub.fastq ./03-Trim_subset/SRR2584866_2.trim.sub.fastq > ./04-Align/SRR2584866.aligned.sam
 ```
-Convert the output sam file to a bam file using the program samtools:
+View the output, which is a sam file:
+```
+less -S ./04-Align/SRR2584866.aligned.sam
+```
+Convert the sam file to a bam file, and then sort and index the bam file, using the program samtools:
 ```
 module load samtools
+
 samtools view -S -b ./04-Align/SRR2584866.aligned.sam > ./04-Align/SRR2584866.aligned.bam
-samtools sort ./04-Align/SRR2584866.aligned.bam  -o ./04-Align/SRR2584866.aligned.sorted.bam 
+
+samtools sort ./04-Align/SRR2584866.aligned.bam -o ./04-Align/SRR2584866.aligned.sorted.bam
+
+samtools index ./04-Align/SRR2584866.aligned.sorted.bam 
 ```
+Now, remove the sam file and the unsorted bam file, to save hard drive space:
+```
+rm ./04-Align/SRR2584866.aligned.sam
+rm ./04-Align/SRR2584866.aligned.bam 
+```
+
 Learn more about the bam file:
 ```
 samtools flagstat ./04-Align/SRR2584866.aligned.sorted.bam 
@@ -113,15 +127,17 @@ Identify and genotype variant positions for one sample using bcftools:
 ```
 module load bcftools
 mkdir ./05-Genotype
+
 bcftools mpileup -O b -f ./Ref/ecoli_rel606.fasta \
 ./04-Align/SRR2584866.aligned.sorted.bam -o ./05-Genotype/SRR2584866_raw.bcf 
 
 bcftools call --ploidy 1 -m -v ./05-Genotype/SRR2584866_raw.bcf  -o ./05-Genotype/SRR2584866_variants.vcf 
 ```
-Do some basic quality filtering of variants using VCFtools:
+View the output vcf file:
 ```
-module load vcftools
-mkdir ./06-Filter
-vcfutils.pl varFilter ./05-Genotype/SRR2584866_variants.vcf  > ./06-Filter/SRR2584866_final_variants.vcf
+less -S ./05-Genotype/SRR2584866_variants.vcf
 ```
+
+
+
 
