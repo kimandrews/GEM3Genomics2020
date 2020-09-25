@@ -11,8 +11,8 @@ cd ./GEM3GenomicsWorkshop
 ```
 Make a directory for the raw sequence data, and navigate into the directory:
 ```
-mkdir 01-RawData
-cd 01-RawData
+mkdir 00-RawData
+cd 00-RawData
 ```
 
 Create Symlinks (symbolic links) to the raw data, and then view the symlinks:
@@ -39,33 +39,33 @@ Next, we will evaluate the quality of the raw sequence data using two programs: 
 Make a new directory to store the output of quality control analyses:
 
 ```
-mkdir ./02-Quality
+mkdir ./01-Quality
 ```
 
 Load the Fastqc program, and run the program on all the raw sequence data files, putting the output in the 02-Qual folder:
 ```
 module load fastqc
-fastqc ./01-RawData/* -o ./02-Quality
+fastqc ./01-RawData/* -o ./01-Quality
 ```
 Transfer one of the html output files to your local computer, and view it with a web browser.
 
 Load a python module so you can run Multiqc, and use Multiqc to analyze and summarize all the Fastqc output files:
 ```
 module load python
-multiqc -i fastqc ./02-Quality
+multiqc -i fastqc ./01-Quality
 ```
 Transfer one of the html output files to your local computer, and view it with a web browser.
 
 Next, we will "clean" the sequence reads using Trimmomatic. Make a directory to store the output, then load the program:
 ```
-mkdir ./03-Trim
+mkdir ./02-Trim
 module load trimmomatic
 ```
-Run trimmomatic for one sample:
+Run Trimmomatic for one sample:
 ```
-trimmomatic PE ./01-RawData/SRR2589044_1.fastq.gz ./01-RawData/SRR2589044_2.fastq.gz \
-                ./03-Trim/SRR2589044_1.trim.fastq.gz ./03-Trim/SRR2589044_1un.trim.fastq.gz \
-                ./03-Trim/SRR2589044_2.trim.fastq.gz ./03-Trim/SRR2589044_2un.trim.fastq.gz \
+trimmomatic PE ./00-RawData/SRR2589044_1.fastq.gz ./00-RawData/SRR2589044_2.fastq.gz \
+                ./02-Trim/SRR2589044_1.trim.fastq.gz ./02-Trim/SRR2589044_1un.trim.fastq.gz \
+                ./02-Trim/SRR2589044_2.trim.fastq.gz ./02-Trim/SRR2589044_2un.trim.fastq.gz \
                 SLIDINGWINDOW:4:20 MINLEN:25 \
                 ILLUMINACLIP:/opt/modules/biology/trimmomatic/0.33/bin/adapters/NexteraPE-PE.fa:2:40:15 
 ```
@@ -87,38 +87,38 @@ Next we will align the cleaned sequence reads to the reference genome. We will b
 
 Make a directory for the subsampled dataset, create symlinks to the dataset, and view the symlinks:
 ```
-mkdir 03-Trim_subset
-ln -s /mnt/ceph/kandrews/GEM3GenomicsWorkshopData/genomics_trim_subset/*  ./03-Trim_subset
-ls -la ./03-Trim_subset
+mkdir 02-Trim_subset
+ln -s /mnt/ceph/kandrews/GEM3GenomicsWorkshopData/genomics_trim_subset/*  ./02-Trim_subset
+ls -la ./02-Trim_subset
 ```
 Make a directory to store the results of genome alignment, and align the reads from one sample to the reference genome:
 ```
-mkdir ./04-Align
-bwa mem ./Ref/ecoli_rel606.fasta ./03-Trim_subset/SRR2584866_1.trim.sub.fastq ./03-Trim_subset/SRR2584866_2.trim.sub.fastq > ./04-Align/SRR2584866.aligned.sam
+mkdir ./03-Align
+bwa mem ./Ref/ecoli_rel606.fasta ./02-Trim_subset/SRR2584866_1.trim.sub.fastq ./02-Trim_subset/SRR2584866_2.trim.sub.fastq > ./03-Align/SRR2584866.aligned.sam
 ```
 View the output, which is a sam file:
 ```
-less -S ./04-Align/SRR2584866.aligned.sam
+less -S ./03-Align/SRR2584866.aligned.sam
 ```
 Convert the sam file to a bam file, and then sort and index the bam file, using the program samtools:
 ```
 module load samtools
 
-samtools view -S -b ./04-Align/SRR2584866.aligned.sam > ./04-Align/SRR2584866.aligned.bam
+samtools view -S -b ./03-Align/SRR2584866.aligned.sam > ./03-Align/SRR2584866.aligned.bam
 
-samtools sort ./04-Align/SRR2584866.aligned.bam -o ./04-Align/SRR2584866.aligned.sorted.bam
+samtools sort ./03-Align/SRR2584866.aligned.bam -o ./03-Align/SRR2584866.aligned.sorted.bam
 
-samtools index ./04-Align/SRR2584866.aligned.sorted.bam 
+samtools index ./03-Align/SRR2584866.aligned.sorted.bam 
 ```
 Now, remove the sam file and the unsorted bam file, to save hard drive space:
 ```
-rm ./04-Align/SRR2584866.aligned.sam
-rm ./04-Align/SRR2584866.aligned.bam 
+rm ./03-Align/SRR2584866.aligned.sam
+rm ./03-Align/SRR2584866.aligned.bam 
 ```
 
 Learn more about the bam file:
 ```
-samtools flagstat ./04-Align/SRR2584866.aligned.sorted.bam 
+samtools flagstat ./03-Align/SRR2584866.aligned.sorted.bam 
 ```
 ## Variant Calling (Genotyping)
 
@@ -126,16 +126,16 @@ Identify and genotype variant positions for one sample using bcftools:
 
 ```
 module load bcftools
-mkdir ./05-Genotype
+mkdir ./04-Genotype
 
 bcftools mpileup -O b -f ./Ref/ecoli_rel606.fasta \
-./04-Align/SRR2584866.aligned.sorted.bam -o ./05-Genotype/SRR2584866_raw.bcf 
+./03-Align/SRR2584866.aligned.sorted.bam -o ./04-Genotype/SRR2584866_raw.bcf 
 
-bcftools call --ploidy 1 -m -v ./05-Genotype/SRR2584866_raw.bcf  -o ./05-Genotype/SRR2584866_variants.vcf 
+bcftools call --ploidy 1 -m -v ./04-Genotype/SRR2584866_raw.bcf  -o ./04-Genotype/SRR2584866_variants.vcf 
 ```
 View the output vcf file:
 ```
-less -S ./05-Genotype/SRR2584866_variants.vcf
+less -S ./04-Genotype/SRR2584866_variants.vcf
 ```
 
 
