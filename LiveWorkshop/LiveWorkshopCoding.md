@@ -45,7 +45,7 @@ mkdir ./01-Quality
 Load the Fastqc program, and run the program on all the raw sequence data files, putting the output in the 02-Qual folder:
 ```
 module load fastqc
-fastqc ./01-RawData/* -o ./01-Quality
+fastqc ./00-RawData/* -o ./01-Quality
 ```
 Transfer one of the html output files to your local computer, and view it with a web browser.
 
