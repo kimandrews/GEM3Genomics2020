@@ -51,7 +51,7 @@ Transfer one of the html output files to your local computer, and view it with a
 
 Load a python module so you can run Multiqc, and use Multiqc to analyze and summarize all the Fastqc output files:
 ```
-module load python
+module load python/3.6.7
 multiqc -i fastqc ./01-Quality
 ```
 Transfer one of the html output files to your local computer, and view it with a web browser.
