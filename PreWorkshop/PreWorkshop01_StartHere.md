@@ -18,10 +18,10 @@ Once logged on, you will now be able to use a very powerful computer with a lot 
 
 _**What do I do next?**_
 
-Prior to the live portion of the workshop, you will be viewing a series of pre-recorded lectures, and following along with the activities, to learn the basics of how to use the Unix command line. Now that you have access to the servers, you’re ready to start. A few words of advice:
-1. If possible, your life will be easier if you can use two computer monitors: one to watch the lectures, and the other to do the command line activities on the servers. This will also be true for Day 2 of the live portion of the workshop.
+Prior to the live portion of the workshop, you will be viewing a series of pre-recorded lectures and following along with the activities, to learn the basics of how to use the Unix command line. Now that you have access to the servers, you’re ready to start. A few words of advice:
+1. If possible, your life will be easier if you can use two computer monitors: one to watch the lectures, and the other to do the command line activities on the servers. This will also be true for the live coding portion of the workshop.
 2. Please don’t use the servers for non-workshop activities while you have a temporary account. 
-3. If you are already versatile in the Unix command line, you can skip to the very last lecture to learn how to set up your file system on the servers to be ready for the Day 2 live portion of the workshop. This involves creating directories and symlinking the raw data that we will be working with. 
+3. If you are already versatile in the Unix command line, you can skip to the very last lecture to learn how to set up your file system on the servers to be ready for the live coding portion of the workshop. This involves creating directories and symlinking the raw data that we will be working with. 
 
 _**Why are we learning about the Unix command line?**_ 
 
@@ -36,7 +36,7 @@ _**But why are we learning about Unix command line on the servers rather than ou
 
 You could do the Unix command line exercises from the pre-recorded lectures on your personal computer, because the exercises don’t require a lot of computational power or space, and don’t require installation of new programs (unless you are using Windows… see below). However, doing the exercises on the servers has several advantages:
 
-1. It gives you practice with using a server, which you will need to use for the Day 2 bioinformatic analyses for the live portion of the workshop (and for your own future research).
+1. It gives you practice with using a server, which you will need to use for the bioinformatic analyses for the live portion of the workshop (and for your own future research).
 2. If we’re all working on the same servers, it makes it easy to share files needed for the activities.
 3. If you have a Windows computer, you can’t do the pre-recorded lecture activities on your computer unless you install a Linux/Unix emulator. So if you have a Windows machine, working on the servers will be simpler for learning the Unix command line.
 
