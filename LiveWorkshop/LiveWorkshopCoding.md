@@ -163,6 +163,11 @@ bcftools mpileup -O b -f ./Ref/ecoli_rel606.fasta \
 
 bcftools call --ploidy 1 -m -v ./04-Genotype/all_raw.bcf  -o ./04-Genotype/all_variants.vcf 
 ```
+View the vcf file:
+```
+less -S ./04-Genotype/all_variants.vcf 
+```
+
 Filter variants using VCFTools.
 
 Remove indels:
@@ -175,7 +180,10 @@ Remove any loci with mean depth of coverage (across samples) below 5:
 ```
 vcftools --vcf ./04-Genotype/all_variants_SNPs.recode.vcf --out ./04-Genotype/all_variants_SNPs_dp5 --min-meanDP 5 --recode
 ```
-
+View the filtered vcf file:
+```
+less -S ./04-Genotype/all_variants_SNPs_dp5.recode.vcf
+```
 
 
 
