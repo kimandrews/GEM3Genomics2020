@@ -78,7 +78,7 @@ mkdir ./Ref
 ln -s /mnt/ceph/kandrews/GEM3GenomicsWorkshopData/genomics_Ref/ecoli_rel606.fasta ./Ref
 ls -la ./Ref
 ```
-Load bwa, and index the reference genome:
+Load BWA, and index the reference genome:
 ```
 module load bwa
 bwa index ./Ref/ecoli_rel606.fasta
@@ -122,7 +122,7 @@ samtools flagstat ./03-Align/SRR2584866.aligned.sorted.bam
 ```
 ## Variant Calling (Genotyping)
 
-Identify and genotype variant positions for one sample using bcftools:
+Identify and genotype variants for one sample using bcftools:
 
 ```
 module load bcftools
@@ -137,6 +137,48 @@ View the output vcf file:
 ```
 less -S ./04-Genotype/SRR2584866_variants.vcf
 ```
+
+## Analyze all the samples using shell scripts
+
+Use shell scripts to analyze all of the samples efficiently.
+
+Copy the scripts to your account:
+```
+cp /mnt/ceph/kandrews/GEM3GenomicsWorkshopScripts/02-TrimLoop.sh ~/GEM3GenomicsWorkshop
+
+cp /mnt/ceph/kandrews/GEM3GenomicsWorkshopScripts/03-AlignLoop.sh ~/GEM3GenomicsWorkshop
+```
+
+Run Trimmomatic for all samples:
+```
+bash 02-TrimLoop.sh
+```
+Align all samples to the reference genome, using the subsetted, trimmed datafiles so the analysis will go faster:
+```
+bash 03-AlignLoop.sh
+```
+Identify and gentype variants for all subsetted samples:
+```
+bcftools mpileup -O b -f ./Ref/ecoli_rel606.fasta \
+./03-Align/*.aligned.sorted.bam -o ./04-Genotype/all_raw.bcf -a DP
+
+bcftools call --ploidy 1 -m -v ./04-Genotype/all_raw.bcf  -o ./04-Genotype/all_variants.vcf 
+```
+Filter the variants using VCFTools.
+
+Remove indels:
+```
+module load vcftools
+
+vcftools --vcf ./04-Genotype/all_variants.vcf --out ./04-Genotype/all_variants_SNPs --remove-indels --recode
+```
+Remove any loci with mean depth of coverage (across samples) below 5:
+```
+vcftools --vcf ./04-Genotype/all_variants_SNPs.recode.vcf --out ./04-Genotype/all_variants_SNPs_dp5 --min-meanDP 5 --recode
+```
+
+
+
 
 
 
