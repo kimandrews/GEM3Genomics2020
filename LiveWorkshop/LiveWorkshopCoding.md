@@ -140,12 +140,11 @@ less -S ./04-Genotype/SRR2584866_variants.vcf
 
 ## Analyze all the samples using shell scripts
 
-Use shell scripts to analyze all of the samples efficiently.
+Use shell scripts to efficiently analyze all the samples.
 
 Copy the scripts to your account:
 ```
 cp /mnt/ceph/kandrews/GEM3GenomicsWorkshopScripts/02-TrimLoop.sh ~/GEM3GenomicsWorkshop
-
 cp /mnt/ceph/kandrews/GEM3GenomicsWorkshopScripts/03-AlignLoop.sh ~/GEM3GenomicsWorkshop
 ```
 
@@ -153,18 +152,18 @@ Run Trimmomatic for all samples:
 ```
 bash 02-TrimLoop.sh
 ```
-Align all samples to the reference genome, using the subsetted, trimmed datafiles so the analysis will go faster:
+Align all samples to the reference genome, using the subsampled, trimmed datafiles so the analysis will go faster:
 ```
 bash 03-AlignLoop.sh
 ```
-Identify and gentype variants for all subsetted samples:
+Identify and genotype variants for all subsampled datafiles:
 ```
 bcftools mpileup -O b -f ./Ref/ecoli_rel606.fasta \
 ./03-Align/*.aligned.sorted.bam -o ./04-Genotype/all_raw.bcf -a DP
 
 bcftools call --ploidy 1 -m -v ./04-Genotype/all_raw.bcf  -o ./04-Genotype/all_variants.vcf 
 ```
-Filter the variants using VCFTools.
+Filter variants using VCFTools.
 
 Remove indels:
 ```
