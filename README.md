@@ -3,32 +3,44 @@
 ## **Schedule**
 
 **Pre-Workshop:**
-1. Connect to the servers
-2. Learn Unix command line via pre-recorded lectures
-3. Set up for Day 2 of the live workshop
-4. Short survey
+1. Join the Slack Channel
+2. [Read Pre-Workshop instructions](https://github.com/kimandrews/GEM3Genomics2020/blob/master/PreWorkshop/PreWorkshop01_StartHere.md:)
+3. Connect to the University of Idaho IBEST CRC servers
+4. [Learn Unix command line via pre-recorded tutorials](https://github.com/kimandrews/GEM3Genomics2020/blob/master/PreWorkshop/PreWorkshop01_StartHere.md:)
+5. [Set up for the live workshop (symlink to raw data)](https://uidaho.zoom.us/rec/share/5yRT7O6dlWS6xlJFDJC_5zJmN5opA0HAW5UiSKi6d5JdnQchkNC2F2zOPL_OX001.6eMsCgGVr5BNExap?startTime=1600983926000)
+
 
 **Live Workshop:**
 
-Day 1 (Lecture & Discussion):
-1. Introductions
-2. Next generation sequencing (NGS) technologies
-3. NGS library prep
-4. Fastq files
-5. NGS Methods:  
-    a. Whole genome sequencing  
-    b. RADseq  
-    c. Amplicon sequencing
-6. How do you choose an NGS method?
+Day 1 (Oct 30)
+1.	Session 1 (8:30-10:30 PT, 9:30-11:30 MT):  
+    - Introductions  
+    - NGS sequencing technologies: Illumina, PacBio, ONT  
+    - Illumina output  
+    - NGS Applications Part 1: Whole genome sequencing  
+    - Live coding: Illumina Fastq files  
+2.	Session 2 (2:00-4:00 PT, 3:00-5:00 MT):  
+    - Live coding: Illumina whole genome sequence data  
+       - Quality control  
+       - Align to a reference genome  
+       - Variant calling  
 
-Day 2 (Live coding):
-1. Cleaning sequence data
-2. Aligning to a reference genome
-3. Genotyping
-4. Organizing your genomics project
-
-## **PreWorkshop Instructions**
-1. Go to the PreWorkshop folder (see above) and read this file: PreWorkshop01_StartHere.md
-2. Follow the instructions to get access to the CRC servers
-3. Go through the PreWorkshop recorded lectures. Make sure that when you finish you have your environment set up with the directories and data needed for Day 2 of the live workshop
-4. Take the survey
+Day 2 (Nov 6)
+1.	Session 1 (8:30-10:30 PT, 9:30-11:30 MT):  
+    - NGS Applications Part 2  
+      - RADseq    
+      - DNA capture  
+      - Amplicon sequencing  
+      - RNAseq  
+      - Epigenomics  
+      - Low quality DNA  
+    - How to choose a method   
+    - Breakout groups  
+2. Session 2 (2:00-4:00 PT, 3:00-5:00 MT):  
+   - Computer resources available to GEM3  
+   - Report back from breakout groups  
+   - Live coding: Illumina whole genome sequence data  
+     - Loops  
+     - Filtering  
+   - Bioinformatics Best Practices  
+   - Other resources and skills you should learn  
