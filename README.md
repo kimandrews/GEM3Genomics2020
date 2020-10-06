@@ -4,9 +4,9 @@
 
 **Pre-Workshop:**
 1. Join the Slack Channel
-2. [Read Pre-Workshop instructions](https://github.com/kimandrews/GEM3Genomics2020/blob/master/PreWorkshop/PreWorkshop01_StartHere.md:)
+2. [Read Pre-Workshop instructions](https://github.com/kimandrews/GEM3Genomics2020/tree/master/PreWorkshop)
 3. Connect to the University of Idaho IBEST CRC servers
-4. [Learn Unix command line via pre-recorded tutorials](https://github.com/kimandrews/GEM3Genomics2020/blob/master/PreWorkshop/PreWorkshop01_StartHere.md:)
+4. [Learn Unix command line via pre-recorded tutorials](https://github.com/kimandrews/GEM3Genomics2020/tree/master/PreWorkshop)
 5. [Set up for the live workshop (symlink to raw data)](https://uidaho.zoom.us/rec/share/5yRT7O6dlWS6xlJFDJC_5zJmN5opA0HAW5UiSKi6d5JdnQchkNC2F2zOPL_OX001.6eMsCgGVr5BNExap?startTime=1600983926000)
 
 
