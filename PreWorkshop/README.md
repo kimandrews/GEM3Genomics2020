@@ -1,17 +1,17 @@
-# **Pre-Workshop:**
+# **Pre-Workshop**
 
-# **Recorded tutorials**
+## **Recorded tutorials**
 
-## Unix Tutorials (password required)
+### Unix Tutorials (password required)
 [1 - Intro and Navigating](https://vimeo.com/464839959)  
 [2 - Creating and Manipulating Directories](https://vimeo.com/464840162)  
 [3 - Pipes and Filters](https://vimeo.com/464840216)   
 Remaining tutorials will become available by Oct 12
 
-## Workshop Live Coding Setup Tutorial
+### Workshop Live Coding Setup Tutorial
 [Set up for workshop live coding](https://uidaho.zoom.us/rec/share/5yRT7O6dlWS6xlJFDJC_5zJmN5opA0HAW5UiSKi6d5JdnQchkNC2F2zOPL_OX001.6eMsCgGVr5BNExap?startTime=1600983926000)  
 
-# **Introduction and Server Access**
+## **Introduction and Server Access**
 
 
 For this workshop we will be doing genomic analyses on servers that are part of the [University of Idaho IBEST Computational Resources Core (CRC)](https://crc.ibest.uidaho.edu/). 
