@@ -42,7 +42,7 @@ Make a new directory to store the output of quality control analyses:
 mkdir ./01-Quality
 ```
 
-Load the Fastqc program, and run the program on all the raw sequence data files, putting the output in the 02-Qual folder:
+Load the Fastqc program, and run the program on all the raw sequence data files, putting the output in the 01-Qual folder:
 ```
 module load fastqc
 fastqc ./00-RawData/* -o ./01-Quality
