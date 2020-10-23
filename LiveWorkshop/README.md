@@ -27,19 +27,25 @@ View one of the raw datafiles:
 zcat SRR2584863_1.fastq.gz | less -S
 ```
 
-Move back up into the GEM3GenomicsWorkshop directory:
 
-```
-cd ../
-```
 
 ## Quality control
 Next, we will evaluate the quality of the raw sequence data using two programs: Fastqc and Multiqc. Fastqc summarizes quality for one fastq file at a time, whereas Multiqc summarizes quality for multiple fastq files at a time.
+
+Move back into the GEM3GenomicsWorkshop directory:
+
+```
+cd ~/GEM3GenomicsWorkshop
+```
 
 Make a new directory to store the output of quality control analyses:
 
 ```
 mkdir ./01-Quality
+```
+View which programs (modules) are available on the servers:
+```
+module av
 ```
 
 Load the Fastqc program, and run the program on all the raw sequence data files, putting the output in the 01-Qual folder:
@@ -69,6 +75,10 @@ trimmomatic PE ./00-RawData/SRR2589044_1.fastq.gz ./00-RawData/SRR2589044_2.fast
                 SLIDINGWINDOW:4:20 MINLEN:25 \
                 ILLUMINACLIP:/opt/modules/biology/trimmomatic/0.33/bin/adapters/NexteraPE-PE.fa:2:40:15 
 ```
+Questions:  
+1. Why does Trimmomatic output 2 files each for the forward and reverse reads, for a total of 4 files?
+2. If you ran your Trimmomatic output through Fastqc and Multiqc, what do you think would be different?
+
 ## Align to a reference genome
 Next, we will align the cleaned sequence reads to a reference genome for one sample using the program BWA.
 
@@ -120,6 +130,9 @@ Learn more about the bam file:
 ```
 samtools flagstat ./03-Align/SRR2584866.aligned.sorted.bam 
 ```
+Questions:  
+1. How does a bacterial genome compare to the genome of a trout, sagebrush, or your study species?
+2. If you were doing amplicon sequencing, what would you use for your reference genome?
 ## Variant Calling (Genotyping)
 
 Identify and genotype variants for one sample using bcftools:
