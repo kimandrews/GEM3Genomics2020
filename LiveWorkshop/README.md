@@ -127,7 +127,7 @@ rm ./03-Align/SRR2584866.aligned.bam
 ```
 The bam file is not human-readable, but samtools provides a way you can view it:
 ```
-samtools view SRR2584866.aligned.sorted.bam | less -S
+samtools view ./03-Align/SRR2584866.aligned.sorted.bam | less -S
 ```
 Learn more about the bam file:
 ```
