@@ -104,34 +104,34 @@ ls -la ./02-Trim_subset
 Make a directory to store the results of genome alignment, and align the reads from one sample to the reference genome:
 ```
 mkdir ./03-Align
-bwa mem ./Ref/ecoli_rel606.fasta ./02-Trim_subset/SRR2584866_1.trim.sub.fastq ./02-Trim_subset/SRR2584866_2.trim.sub.fastq > ./03-Align/SRR2584866.aligned.sam
+bwa mem ./Ref/ecoli_rel606.fasta ./02-Trim_subset/SRR2589044_1.trim.sub.fastq ./02-Trim_subset/SRR2589044_2.trim.sub.fastq > ./03-Align/SRR2589044.aligned.sam
 ```
 View the output, which is a sam file:
 ```
-less -S ./03-Align/SRR2584866.aligned.sam
+less -S ./03-Align/SRR2589044.aligned.sam
 ```
 Convert the sam file to a bam file, and then sort and index the bam file, using the program samtools:
 ```
 module load samtools
 
-samtools view -S -b ./03-Align/SRR2584866.aligned.sam > ./03-Align/SRR2584866.aligned.bam
+samtools view -S -b ./03-Align/SRR2589044.aligned.sam > ./03-Align/SRR2589044.aligned.bam
 
-samtools sort ./03-Align/SRR2584866.aligned.bam -o ./03-Align/SRR2584866.aligned.sorted.bam
+samtools sort ./03-Align/SRR2589044.aligned.bam -o ./03-Align/SRR2589044.aligned.sorted.bam
 
-samtools index ./03-Align/SRR2584866.aligned.sorted.bam 
+samtools index ./03-Align/SRR2589044.aligned.sorted.bam 
 ```
 Now, remove the sam file and the unsorted bam file, to save hard drive space:
 ```
-rm ./03-Align/SRR2584866.aligned.sam
-rm ./03-Align/SRR2584866.aligned.bam 
+rm ./03-Align/SRR2589044.aligned.sam
+rm ./03-Align/SRR2589044.aligned.bam 
 ```
 The bam file is not human-readable, but samtools provides a way you can view it:
 ```
-samtools view ./03-Align/SRR2584866.aligned.sorted.bam | less -S
+samtools view ./03-Align/SRR2589044.aligned.sorted.bam | less -S
 ```
 Learn more about the bam file:
 ```
-samtools flagstat ./03-Align/SRR2584866.aligned.sorted.bam 
+samtools flagstat ./03-Align/SRR2589044.aligned.sorted.bam 
 ```
 Questions:  
 1. How does a bacterial genome compare to the genome of a trout, sagebrush, or your study species?
@@ -145,13 +145,13 @@ module load bcftools
 mkdir ./04-Genotype
 
 bcftools mpileup -O b -f ./Ref/ecoli_rel606.fasta \
-./03-Align/SRR2584866.aligned.sorted.bam -o ./04-Genotype/SRR2584866_raw.bcf 
+./03-Align/SRR2589044.aligned.sorted.bam -o ./04-Genotype/SRR2589044_raw.bcf 
 
-bcftools call --ploidy 1 -m -v ./04-Genotype/SRR2584866_raw.bcf  -o ./04-Genotype/SRR2584866_variants.vcf 
+bcftools call --ploidy 1 -m -v ./04-Genotype/SRR2589044_raw.bcf  -o ./04-Genotype/SRR2589044_variants.vcf 
 ```
 View the output vcf file:
 ```
-less -S ./04-Genotype/SRR2584866_variants.vcf
+less -S ./04-Genotype/SRR2589044_variants.vcf
 ```
 
 ## Analyze all the samples using shell scripts
