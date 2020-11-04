@@ -183,6 +183,7 @@ View the vcf file:
 ```
 less -S ./04-Genotype/all_variants.vcf 
 ```
+Question: How does the vcf file for all the samples differ from the vcf file with just one sample?  
 
 Filter variants using VCFTools.
 
@@ -200,6 +201,7 @@ View the filtered vcf file:
 ```
 less -S ./04-Genotype/all_variants_SNPs_dp5.recode.vcf
 ```
+Question: How does the filtered vcf file differ from the unfiltered vcf file?  
 
 
 
