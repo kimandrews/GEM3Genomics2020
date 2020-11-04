@@ -185,7 +185,9 @@ less -S ./04-Genotype/all_variants.vcf
 ```
 Question: How does the vcf file for all the samples differ from the vcf file with just one sample?  
 
-Filter variants using VCFTools.
+## Filter variants
+
+We will use VCFtools to filter the genetic variants
 
 Remove indels:
 ```
