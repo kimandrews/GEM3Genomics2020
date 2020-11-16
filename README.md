@@ -46,4 +46,4 @@ Day 2 (Nov 6)
    - Other resources and skills you should learn  
 
     
-<sub><sup>This workshop was made possible by the NSF Idaho EPSCoR Program and by the National Science Foundation under award number OIA-1757324.<sub><sup>
+<sub>This workshop was made possible by the NSF Idaho EPSCoR Program and by the National Science Foundation under award number OIA-1757324.<sub>
